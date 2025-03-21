@@ -10,6 +10,9 @@ import axios from "axios";
 import { useFeedbackAlert } from "@/components/feedback-alert/useFeedbackAlert";
 import FeedbackAlert from "@/components/feedback-alert/FeedbackAlert";
 import { useRouter } from "next/navigation";
+import StatsIcon from "@/components/icons/StatsIcon";
+import Link from "next/link";
+import CutIcon from "@/components/icons/CutIcon";
 
 export default function Home() {
     const router = useRouter();
@@ -26,9 +29,12 @@ export default function Home() {
         hideFeedback();
 
         try {
-            const shortenedUrl = await shortenedService.create(url);
-            router.push(`/result/${shortenedUrl.data.suffix}`);
+            console.log("url", url);
+            const response = await shortenedService.create(url);
+            console.log("response", response);
+            router.push(`/result/${response.data.suffix}`);
         } catch (error: unknown) {
+            console.error("Error acortando la URL", error);
             let errorMessage = "Ocurrió un error desconocido";
             if (axios.isAxiosError(error)) {
                 errorMessage =
@@ -45,7 +51,7 @@ export default function Home() {
     return (
         <main className={styles.page}>
             <Logo />
-            <form className={styles.form} onSubmit={handleSubmit}>
+            <form id="shorten" className={styles.form} onSubmit={handleSubmit}>
                 <Input
                     name="url"
                     className={styles.input}
@@ -53,8 +59,23 @@ export default function Home() {
                     type="url"
                     required
                 />
-                <Button isLoading={isLoading}>Acortar!</Button>
             </form>
+            <div className={styles.actions}>
+                <Link href="/stats">
+                    <Button styleType="secondary">
+                        <span className={styles["icon-button"]}>
+                            <StatsIcon className={styles.icon} />
+                            Ver Estadísticas
+                        </span>
+                    </Button>
+                </Link>
+                <Button form="shorten" type="submit" isLoading={isLoading}>
+                    <span className={styles["icon-button"]}>
+                        <CutIcon className={`${styles.icon} ${isLoading ? styles.loading : ""}`} />
+                        Acortar el enlace
+                    </span>
+                </Button>
+            </div>
             {feedback && (
                 <FeedbackAlert
                     message={feedback.message}

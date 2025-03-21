@@ -8,7 +8,7 @@
     gap: 24px;
 }
 
-.content {
+.form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,7 +33,6 @@
     height: 24px;
     fill: var(--background);
 }
-
 
 @media (max-width: 480px) {
     .page {

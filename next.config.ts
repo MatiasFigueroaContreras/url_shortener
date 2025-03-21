@@ -1,31 +1,30 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  async rewrites() {
+  rewrites: async () => {
     return [
       {
-        source: "/api/v1/:path*",
+        source: "/api/:path*",
         destination:
           process.env.NODE_ENV === "development"
-            ? "http://127.0.0.1:8000/api/v1/:path*" :
+            ? "http://127.0.0.1:8000/api/:path*" :
             "/api/"
       },
       {
         source: "/docs",
         destination:
           process.env.NODE_ENV === "development"
-            ? "http://127.0.0.1:8000/api/v1/docs"
-            : "/api/v1/docs",
+            ? "http://127.0.0.1:8000/api/docs"
+            : "/api/docs",
       },
       {
         source: "/openapi.json",
         destination:
           process.env.NODE_ENV === "development"
-            ? "http://127.0.0.1:8000/api/v1/openapi.json"
-            : "/api/v1/openapi.json",
+            ? "http://127.0.0.1:8000/api/openapi.json"
+            : "/api/openapi.json",
       },
     ]
-
   }
 };
 

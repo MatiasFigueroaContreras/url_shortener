@@ -12,6 +12,14 @@
     visibility: visible;
 }
 
+.button.primary {
+    background-color: var(--primary-color-500);
+}
+
+.button.secondary {
+    background-color: var(--primary-color-300);
+}
+
 .button:disabled {
     background-color: rgb(110, 110, 110);
     cursor: not-allowed;
@@ -58,8 +66,13 @@
         cursor: not-allowed;
     }
 
-    .button:hover {
+    .button.primary:hover {
         background-color: var(--primary-color-400);
+        box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .button.secondary:hover {
+        background-color: var(--primary-color-200);
         box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);
     }
 }

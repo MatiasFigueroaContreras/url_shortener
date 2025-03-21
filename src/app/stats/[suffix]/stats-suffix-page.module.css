@@ -1,0 +1,148 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3vh 0;
+    height: 100vh;
+    gap: 30px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    gap: 1.2vh;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+}
+
+.title h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color-500);
+}
+
+.actions {
+    display: flex;
+    gap: 18px;
+}
+
+.icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--primary-color-300);
+}
+
+.icon {
+    width: 28px;
+    height: 28px;
+    fill: var(--background);
+}
+
+.title .icon {
+    width: 36px;
+    height: 36px;
+    fill: var(--primary-color-500);
+}
+
+.info {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.info .icon {
+    width: 22px;
+    height: 22px;
+    fill: var(--primary-color-500);
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 1.2rem;
+    color: var(--primary-color-500);
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.divisor {
+    width: 3px;
+    height: 100%;
+    border-radius: 2px;
+    background-color: var(--primary-color-300);
+}
+
+
+.status {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.status.active {
+    color: green;
+}
+
+.status.expired {
+    color: red;
+}
+
+.point {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+
+}
+
+.status.active .point {
+    background-color: green;
+    border: 2px solid rgba(0, 85, 0, 0.3);
+}
+
+.status.expired .point {
+    background-color: red;
+    border: 2px solid rgba(85, 0, 0, 0.3);
+}
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
+}
+
+.tables {
+    display: flex;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+@media (max-width: 1000px) {
+    .content {
+        width: 90vw;
+    }
+}
