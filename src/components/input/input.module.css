@@ -8,7 +8,6 @@
     font-size: 1.4rem;
     font-weight: 600;
     color: var(--primary-color-500);
-    flex-grow: 1;
     width: 100%;
 }
 
@@ -17,6 +16,7 @@
 }
 
 .input-suffix {
+    flex: 1;
     margin-left: 4px;
     color: var(--primary-color-500);
     font-size: 1.4rem;
@@ -24,7 +24,7 @@
     background-color: transparent;
     border: none;
     outline: none;
-    flex-grow: 1;
+    width: 100%;
 }
 
 
@@ -37,7 +37,7 @@
     font-size: 1.4rem;
     font-weight: 600;
     outline: none;
-    flex: 1;
+    width: 100%;
 }
 
 .input:focus {
@@ -57,5 +57,4 @@
     .input-suffix {
         font-size: 1.1rem;
     }
-
 }
