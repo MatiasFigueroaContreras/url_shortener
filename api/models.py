@@ -32,4 +32,5 @@ class ShortUrlStats(BaseModel):
 # Request models
 class ShortUrlCreate(BaseModel):
     url: str
+    suffix: Optional[str] = None
     expiration_time: Optional[int] = None

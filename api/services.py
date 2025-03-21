@@ -32,10 +32,18 @@ async def exists_shortened_url(suffix: str):
 async def create_shortened_url(short_url: ShortUrlCreate) -> ShortUrl:
     if not utils.is_valid_url(short_url.url):
         raise BadRequestException("La URL ingresada no es válida")
-
-    suffix = utils.generate_suffix()
-    while await exists_shortened_url(suffix):
+    
+    suffix = short_url.suffix
+    if suffix and await exists_shortened_url(suffix):
+        raise BadRequestException("La URL personalizada ya está en uso")
+    
+    if suffix and not utils.is_valid_suffix(suffix):
+        raise BadRequestException("La URL personalizada no es válida")
+    
+    if (not suffix):
         suffix = utils.generate_suffix()
+        while await exists_shortened_url(suffix):
+            suffix = utils.generate_suffix()
 
     default_expiration_time = 3 * 24 * 60 * 60  # 3 days
 

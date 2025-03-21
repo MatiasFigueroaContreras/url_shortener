@@ -10,8 +10,11 @@ class ShortenedService {
         return await axios.get(`${API_ENDPOINT}/${suffix}/`)
     }
 
-    async create(url: string): Promise<AxiosResponse<ShortUrl, unknown>> {
-        return await axios.post(`${API_ENDPOINT}/`, { url })
+    async create(url: string, suffix: string | undefined): Promise<AxiosResponse<ShortUrl, unknown>> {
+        if (suffix == "")
+            suffix = undefined;
+
+        return await axios.post(`${API_ENDPOINT}/`, { url, suffix })
     }
 
     async exists(suffix: string): Promise<AxiosResponse<boolean, unknown>> {

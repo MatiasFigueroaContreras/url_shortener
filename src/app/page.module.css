@@ -8,8 +8,28 @@
   gap: 24px;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
 .form .input {
-  min-width: 45vw;
+  width: 100%;
+  min-width: 35vw;
+}
+
+.custom-suffix {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-suffix .info {
+  align-self: flex-end;
+  font-size: 0.9rem;
 }
 
 .actions {
@@ -48,5 +68,10 @@
 
   .form .input {
     min-width: 85vw;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
   }
 }

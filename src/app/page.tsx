@@ -14,6 +14,8 @@ import StatsIcon from "@/components/icons/StatsIcon";
 import Link from "next/link";
 import CutIcon from "@/components/icons/CutIcon";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000/";
+
 export default function Home() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -24,13 +26,16 @@ export default function Home() {
         const form = event.currentTarget;
         const formData = new FormData(form);
         const url = formData.get("url") as string;
-
+        const suffix = formData.get("suffix") as string;
+        if (suffix == "stats" || suffix == "result") {
+            showFeedback("El sufijo no puede ser 'stats' o 'result'", "error");
+            return;
+        }
         setIsLoading(true);
         hideFeedback();
-
         try {
             console.log("url", url);
-            const response = await shortenedService.create(url);
+            const response = await shortenedService.create(url, suffix);
             console.log("response", response);
             router.push(`/result/${response.data.suffix}`);
         } catch (error: unknown) {
@@ -55,10 +60,19 @@ export default function Home() {
                 <Input
                     name="url"
                     className={styles.input}
-                    placeholder="Ingresa el enlace aquí"
+                    placeholder="Ingresa el enlace aquí *"
                     type="url"
                     required
                 />
+                <div className={styles["custom-suffix"]}>
+                    <Input
+                        name="suffix"
+                        placeholder="sufijo"
+                        prefix={SITE_URL + "/"}
+                        type="text"
+                    />
+                    <span className={styles.info}>Déjalo en blanco para un sufijo aleatorio</span>
+                </div>
             </form>
             <div className={styles.actions}>
                 <Link href="/stats">
@@ -71,7 +85,11 @@ export default function Home() {
                 </Link>
                 <Button form="shorten" type="submit" isLoading={isLoading}>
                     <span className={styles["icon-button"]}>
-                        <CutIcon className={`${styles.icon} ${isLoading ? styles.loading : ""}`} />
+                        <CutIcon
+                            className={`${styles.icon} ${
+                                isLoading ? styles.loading : ""
+                            }`}
+                        />
                         Acortar el enlace
                     </span>
                 </Button>

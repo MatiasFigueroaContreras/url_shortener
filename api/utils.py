@@ -18,6 +18,9 @@ def is_valid_url(url: str):
     return validators.url(url)
 
 
+def is_valid_suffix(suffix: str):
+    return len(suffix) <= 50 and suffix.isalnum()
+
 def extract_click_info(request: Request):
     ip = request.client.host if request.client else "Unknown"
     country = get_country(ip) if ip != "Unknown" else "Unknown"
