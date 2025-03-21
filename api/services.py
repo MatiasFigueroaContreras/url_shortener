@@ -1,19 +1,16 @@
-
 from datetime import datetime
 from fastapi import Request
-from api.db import db
+from api.db import get_mongo_client
 from api.exceptions import BadRequestException, NotFoundException
 from api.models import ShortUrl, ShortUrlCreate, ShortUrlStats
 import api.utils as utils
 
 
 async def get_shortened_url(suffix: str) -> ShortUrl:
-    print("Service get_shortened")
-    shortened_url = await db.shortened_urls.find_one({"suffix": suffix})
-    print("Service get_shortened", shortened_url)
+    db = get_mongo_client()
+    shortened_url = db.shortened_urls.find_one({"suffix": suffix})
     if not shortened_url:
         raise NotFoundException("La URL ingresada no existe")
-    print("If passed")
     return ShortUrl(
         url=shortened_url.get("url"),
         suffix=shortened_url.get("suffix"),
@@ -25,7 +22,8 @@ async def get_shortened_url(suffix: str) -> ShortUrl:
 
 
 async def exists_shortened_url(suffix: str):
-    shortened_url = await db.shortened_urls.find_one({"suffix": suffix})
+    db = get_mongo_client()
+    shortened_url = db.shortened_urls.find_one({"suffix": suffix})
     return shortened_url is not None
 
 
@@ -55,13 +53,14 @@ async def create_shortened_url(short_url: ShortUrlCreate) -> ShortUrl:
         hits=0,
         clicks=[]
     )
-
-    await db.shortened_urls.insert_one(shortened_url.model_dump())
+    db = get_mongo_client()
+    db.shortened_urls.insert_one(shortened_url.model_dump())
     return shortened_url
 
 
 async def click_shortened_url(suffix: str, request: Request) -> ShortUrl:
-    shortened_url = await db.shortened_urls.find_one({"suffix": suffix})
+    db = get_mongo_client()
+    shortened_url = db.shortened_urls.find_one({"suffix": suffix})
     if not shortened_url:
         raise NotFoundException("La URL ingresada no existe")
 
@@ -77,7 +76,7 @@ async def click_shortened_url(suffix: str, request: Request) -> ShortUrl:
     shortened_url["clicks"] = shortened_url.get("clicks", [])
     shortened_url["clicks"].append(click_info)
 
-    await db.shortened_urls.update_one(
+    db.shortened_urls.update_one(
         {"suffix": suffix},
         {"$set": shortened_url}
     )
@@ -92,7 +91,8 @@ async def click_shortened_url(suffix: str, request: Request) -> ShortUrl:
 
 
 async def get_shortened_url_stats(suffix: str) -> ShortUrlStats:
-    shortened_url = await db.shortened_urls.find_one({"suffix": suffix})
+    db = get_mongo_client()
+    shortened_url = db.shortened_urls.find_one({"suffix": suffix})
     if not shortened_url:
         raise NotFoundException("La URL ingresada no existe")
 

@@ -14,7 +14,7 @@ class ShortenedService {
         if (suffix == "")
             suffix = undefined;
 
-        return await axios.post(`${API_ENDPOINT}/`, { url, suffix })
+        return await axios.post(`${API_ENDPOINT}`, { url, suffix })
     }
 
     async exists(suffix: string): Promise<AxiosResponse<boolean, unknown>> {

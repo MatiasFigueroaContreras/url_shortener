@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "install:api": "pip install -r requirements.txt",
+    "dev:api": "uvicorn api.index:app --reload",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

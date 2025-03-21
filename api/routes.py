@@ -15,7 +15,7 @@ async def get_shortened_url(suffix: str) -> ShortUrl:
     return shortened_url
 
 
-@shortened_router.post("/", response_model=ShortUrl)
+@shortened_router.post("", response_model=ShortUrl)
 async def create_shortened_url(short_url: ShortUrlCreate) -> ShortUrl:
     generated_url = await services.create_shortened_url(short_url)
     return generated_url
