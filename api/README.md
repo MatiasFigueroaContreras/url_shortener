@@ -1,7 +1,7 @@
 ## 📄 Documentación de la API
 
 🔗 **URL de la documentación en producción:**  
-[https://tu-url-acortador.vercel.app/api/docs](https://tu-url-acortador.vercel.app/api/docs)  
+[https://sho-url.vercel.app/api/docs](https://sho-url.vercel.app/api/docs)  
 
 La API proporciona los siguientes endpoints:
 
