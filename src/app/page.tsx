@@ -34,12 +34,9 @@ export default function Home() {
         setIsLoading(true);
         hideFeedback();
         try {
-            console.log("url", url);
             const response = await shortenedService.create(url, suffix);
-            console.log("response", response);
             router.push(`/result/${response.data.suffix}`);
         } catch (error: unknown) {
-            console.error("Error acortando la URL", error);
             let errorMessage = "Ocurrió un error desconocido";
             if (axios.isAxiosError(error)) {
                 errorMessage =

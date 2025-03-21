@@ -107,7 +107,7 @@ async def get_shortened_url_stats(suffix: str) -> ShortUrlStats:
     unique_hits = 0
 
     for click in clicks:
-        # Check if the click is unique by comparing the IP
+        # Verificar si la IP ya ha sido contada
         ip_hits[click["ip"]] = ip_hits.get(click["ip"], 0) + 1
         if (not click["ip"] == "Unknown") and (ip_hits[click["ip"]] == 1):
             unique_hits += 1
