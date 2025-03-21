@@ -1,7 +1,7 @@
 # URL Shortener
 
 Proyecto que permite acortar URLs desarrollado con **Next.js** en el frontend y **FastAPI** en el backend.  
-Está desplegado en **Vercel**, tanto el frontend como el backend.
+Está desplegado en **Vercel**, tanto el frontend como el backend, y utiliza una base de datos **MongoDB** en la nube.
 
 🔗 **URL del proyecto en producción:** [https://sho-url.vercel.app](https://sho-url.vercel.app)
 
